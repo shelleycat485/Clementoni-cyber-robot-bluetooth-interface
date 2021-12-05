@@ -22,6 +22,43 @@ import sys
 
 helpstr = 'argument can be: fwd back left right sound ledon ledoff\narguments can be repeated'
  
+
+def scan(c):
+  from time import sleep
+  led(c, 1)
+  sleep(0.3)
+  led(c, 0)
+  # take two pics
+  # diff them
+  # if over threhold diff, move to centre
+  # if was found, return bar else return zero as tuple (n_slices, found_slice) 
+
+def seek(c):
+  from time import sleep
+  # scan, then right 4 and scan
+  d1 = 1.25
+  scan(c)
+  sleep(d1)
+  for n in range(1,4):
+    move(c, 'right')
+    scan(c)
+    sleep(d1)
+
+  for n in range(1,4):
+    move(c, 'left')
+    sleep(d1)
+    
+  for n in range(1,4):
+    move(c, 'left')
+    scan(c)
+    sleep(d1)
+
+
+def mmove(characteristics, count):
+  for n in range(1, count):
+    move(characteristics, 'fwd')
+  
+
 dir_direction = {'fwd':b'\x31\x32\x44\x30\x53\x33',
                  'back':b'\x31\x32\x44\x31\x53\x33',
                  'left':b'\x31\x32\x44\x32\x53\x33',
@@ -71,4 +108,12 @@ for argument in range (1, len(sys.argv)):
   if curarg.find('help') != -1:
     print(helpstr)
 
+  if curarg == 'mmove':
+    mmove(controlchar, 10)
+
+  if curarg == 'scan':
+    scan(controlchar)
+
+  if curarg == 'seek':
+    seek(controlchar)
 
