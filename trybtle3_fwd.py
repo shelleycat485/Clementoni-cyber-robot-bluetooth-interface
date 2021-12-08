@@ -20,7 +20,7 @@
 from bluepy import btle
 import sys
 
-helpstr = 'argument can be: fwd back left right sound ledon ledoff\narguments can be repeated'
+helpstr = 'argument can be: fwd back left right sound ledon ledoff scan seek\narguments can be repeated'
  
 
 def scan(c):
@@ -36,19 +36,15 @@ def scan(c):
 def seek(c):
   from time import sleep
   # scan, then right 4 and scan
-  d1 = 1.25
   scan(c)
+  d1 = 1.25
   sleep(d1)
-  for n in range(1,4):
+  for n in range(0,4):
     move(c, 'right')
     scan(c)
     sleep(d1)
 
-  for n in range(1,4):
-    move(c, 'left')
-    sleep(d1)
-    
-  for n in range(1,4):
+  for n in range(0,4):
     move(c, 'left')
     scan(c)
     sleep(d1)

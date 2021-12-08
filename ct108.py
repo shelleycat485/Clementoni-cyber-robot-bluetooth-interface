@@ -77,11 +77,13 @@ def main():
       print ("CTxxx -d|-D regex_for_filenames")
     
     (oldflag, oldimg, pathname) = (False, None, '/home/pi/Videos')
-    reobj = re.compile(sys.argv[2], re.I)
-    for fname in sorted(os.listdir(pathname)):
-        if reobj.match(fname):
-            print("main:", fname)
-            img = cv2.imread(os.path.join(pathname, fname))
+    c = campic.camdouble()
+    c.capture()
+    print("after capture")
+
+    for f in c.capresult():
+            img = f
+            #img = cv2.imread(os.path.join(pathname, fname))
             imgg = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
             if oldflag:
                 imgdiff = cv2.absdiff(imgg, oldimg)
@@ -92,10 +94,5 @@ def main():
                     cv2.imshow("hilight", img)
                     cv2.waitKey(10 * 1000)
             (oldflag, oldimg) = (True, imgg)
-
-
-c = campic.camdouble()
-c.capture()
-c.show()
 
 main()
