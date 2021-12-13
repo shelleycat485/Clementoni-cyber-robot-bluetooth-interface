@@ -18,7 +18,7 @@
 from robot_btle import cyber_robot_move
 import sys, os, time, cv2, re
 import campic
-g_nslices = 15
+g_nslices = 21
 g_globseq = 0
 
 robot = cyber_robot_move("03:04:05:06:0E:83")
@@ -43,13 +43,14 @@ class c_reposition:
 	def calc_lor(self, res):
 		(m, p) = (max(res), '')
 		midslice = int(self.nslices/2 + 0.5)
+		sect = int(self.nslices/4 + 0.5)
 		for i in range(0,len(res) - 1):
 			if res[i] == m:
 				self.target_slice = i
 				p = 'fwd'
-				if i > midslice + 2:
+				if i > midslice + sect:
 					p = 'right'
-				if i < midslice - 2:
+				if i < midslice - sect:
 					p = 'left'
 
 		if self.p != p: # a move wanted
@@ -92,12 +93,8 @@ def show_target_on_image(img, slices, hilight):
 		cv2.rectangle(img, (hilight * int(cols/slices),50),((hilight+1) * int(cols/slices), rows - 100),  (0, 255,0), 2)
 
 def navigate():
-	navloop = 0
-	while navloop < 8:
-		navloop  += 1
-		print(f'navloop {navloop:03}')
+	while 148:
 		camd.capture()
-
 		(oldflag, oldimg,) = (False, None,) 
 		for img in camd.capresult():
 			imgg = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
