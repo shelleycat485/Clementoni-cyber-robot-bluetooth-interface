@@ -93,9 +93,8 @@ def show_target_on_image(img, slices, hilight):
 
 def navigate():
 	navloop = 0
-	while navloop < 8:
+	while navloop < 148:
 		navloop  += 1
-		print(f'navloop {navloop:03}')
 		camd.capture()
 
 		(oldflag, oldimg,) = (False, None,) 
