@@ -8,4 +8,16 @@ I used an Adafruit Bluetooth LE Sniffer to see how the app communicated with the
 ## Python Program
 This was to check the commands worked
 
+campic.py Take pairs of pictures and process for differeces
+
+robot_btle.py class to allow control of robot
+
+test_driver.py allows testing the robot_btle class above
+
+trybtle3_fwd.py first try of program to access bt directly, sending commands from the command line
+
+ct108.py get robot moving towards movement, using the library classes.
+
+ct107.py earlier version of the same, historical only
+
 
