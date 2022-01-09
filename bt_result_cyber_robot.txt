@@ -88,3 +88,21 @@ As ascii 12D0S0
             * Dir 0-3
 			  * Strength 0-3
 
+When sending a program stream, this works too
+
+char-write-cmd 0x0065 33340108
+3334 seems to be header
+01 is count of commands following
+04 forward, 08 back, 10 right, 0c left
+e.g. 3334040c0c0c0c sends 4 left.  I cannot see a magnitude in this sequence
+
+At end of program, sends
+ 393953500052
+ perhaps this is a general stop it also seems to clear the led
+
+3334011b sends a sound, 1c a different sound
+
+As the program sequence operates, a response seems to be sent on characteristic 0x0062 which is 303031, 303032... for each step. I haven't used this yet.
+
+
+
